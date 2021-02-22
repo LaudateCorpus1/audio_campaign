@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "7e4d314e-3313-44a8-bf38-7e7f6ff0b1a1",
+		"name": "audio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/audiobook",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"audiobook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_items",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/audiobook/21",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"audiobook",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_items",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5555/audiobook/22",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5555",
+					"path": [
+						"audiobook",
+						"22"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
