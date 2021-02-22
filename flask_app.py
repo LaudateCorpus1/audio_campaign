@@ -28,22 +28,22 @@ def update_id():
 
 def Song(data, Id):
     # Id = Id + 1
-    Name_of_the_song = data['Name_of_the_song']
-    if type(Name_of_the_song) == str and len(Name_of_the_song) < 100:
-        name = Name_of_the_song
+    Name_of_song = data['Name_of_the_Song']
+    if type(Name_of_song) == str and len(Name_of_song) < 100:
+        name = Name_of_song
     else:
         name = None
     Duration_number_of_seconds = data['Duration_number_of_seconds']
-    if type(Duration_number_of_seconds) == str and len(Duration_number_of_seconds) < 100:
+    if type(Duration_number_of_seconds) == int and Duration_number_of_seconds > 100:
         duration = Duration_number_of_seconds
     else:
         duration = None
     Uploaded = datetime.now()
-    if (Id and name and duration) is not None:
+    if (name and duration) is not None:
         data_song = {
-            "id": Id,
-            "category": "Song",
-            "Name of the Song": name,
+            "Id": Id,
+            "category": "song",
+            "Name_of_the_Song": name,
             "Duration_number_of_seconds": duration,
             "Uploaded_time": Uploaded
         }
@@ -80,11 +80,11 @@ def audiobook(data, Id):
         data_audio = {
             "Id": Id,
             "category": "audiobook",
-            "Title of the audiobook": Title,
-            "Author of the title": author,
+            "Title_of_the_audiobook": Title,
+            "Author_of_the_title": author,
             "Narrator": narrator,
             "Duration_number_of_seconds": duration,
-            "Upload_Time": Uploaded_time
+            "Upload_time": Uploaded_time
         }
         update_id()
         return data_audio
@@ -93,7 +93,6 @@ def audiobook(data, Id):
 
 
 def podcast(data, Id):
-    # Id = Id_podcast + 1
     Name_of_the_podcast = data['Name_of_the_podcast']
     if type(Name_of_the_podcast) == str and Name_of_the_podcast and len(Name_of_the_podcast) < 100:
         name = Name_of_the_podcast
@@ -111,7 +110,7 @@ def podcast(data, Id):
     else:
         host = None
 
-    participants = [data['Participants']]
+    participants = data['Participants']
     if len(participants) < 11:
         par = participants
     else:
@@ -135,6 +134,7 @@ def create_items(audioFileType):
     if audioFileType == "song":
         data = request.get_json()
         songdata = Song(data, Id_song)
+        print(songdata)
         if details.insert_one(songdata):
             return jsonify({"Response": "added to db"})
         else:
@@ -167,23 +167,24 @@ def delete_items(audioFileType, Id):
 
 def get_data(category, Id):
     data = details.find_one({'category': category, 'Id': Id})
+    print(data)
     return json_util.dumps(data)
 
 
 @app.route("/<audioFileType>/<int:Id>", methods=['GET'])
 def get_by_id(audioFileType, Id):
+    print(audioFileType, Id)
     d = get_data(audioFileType, Id)
     return d
 
 
-@app.route("/<audioFileType>/<int:Id>", methods=['UPDATE'])
+@app.route("/<audioFileType>/<int:Id>", methods=['PUT'])
 def update_audiofile(audioFileType, Id):
     filter = {"category": audioFileType, "Id": Id}
     if audioFileType == "song":
         data = request.get_json()
-        newvalues = {"$set": {'Name_of_the_song': data['Name_of_the_song'],
-                              'Duration_number_of_seconds': data['Duration_number_of_seconds'],
-                              'Uploaded_time': data['Uploaded_time']
+        newvalues = {"$set": {'Name_of_the_Song': data['Name_of_the_Song'],
+                              'Duration_number_of_seconds': data['Duration_number_of_seconds']
                               }
                      }
         if details.update_one(filter, newvalues):
