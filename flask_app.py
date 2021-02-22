@@ -119,8 +119,8 @@ def podcast(data, Id):
         data_podcast = {
             "Id": Id,
             "category": "podcast",
-            "Name_Of_Podcast": name,
-            "Duration": duration,
+            "Name_of_the_podcast": name,
+            "Duration_number_of_seconds": duration,
             "Uploaded_time": Uploaded_time,
             "Host": host,
             "participants": par
@@ -206,7 +206,7 @@ def update_audiofile(audioFileType, Id):
                                    "Duration_number_of_seconds": data3['Duration_number_of_seconds'],
                                    "Host": data3['Host'],
                                    "Uploaded_time": datetime.now(),
-                                   "participants": data3['Participants']
+                                   "participants": data3['participants']
                                    }
                           }
         if details.update_one(filter, update_podcast):
