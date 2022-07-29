@@ -6,7 +6,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 jsonschema==3.2.0
 MarkupSafe==1.1.1
-mistune==0.8.4
+mistune==2.0.3
 pymongo==3.11.3
 pyrsistent==0.17.3
 PyYAML==5.4.1
